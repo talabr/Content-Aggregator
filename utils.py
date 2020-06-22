@@ -1,9 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as ec
 
 FOX_NEWS_ROOT_URL = 'https://www.foxnews.com'
-FOX_URL = "https://www.foxnews.com/category/health/infectious-disease/coronavirus"
 NBC_URL = "https://www.nbcnews.com/health/coronavirus"
+CHROME_DRIVER_PATH = "C:\Program Files (x86)\chromedriver.exe"
+FOX_URL = "https://www.foxnews.com/category/health/infectious-disease/coronavirus"
 THE_WASHINGTON_POST = "https://www.washingtonpost.com/coronavirus/?itid=nb_hp_coronavirus"
 
 # coronavirous news!
@@ -45,6 +50,19 @@ def get_news_from_washington_post():
     return news_list
 
 
+def using_selenium():
+    driver = webdriver.Chrome(CHROME_DRIVER_PATH)
+    driver.get('https://www.washingtonpost.com/')
+    button = driver.find_elements_by_xpath("//form[@id='search-form']")[0]
+    button.click()
+    # WebDriverWait(driver, 20).until(ec.element_to_be_clickable((By.XPATH,
+    #                                                             "//a[@class='vilynx_listened']"))).click()
+    # WebDriverWait(driver, 50).until(ec.element_to_be_clickable((By.XPATH,
+                                                                # "//div[@class='global']/span[@class='hfs-i hfs-i-search']"))).click()
+
+    # driver.quit()
 # print(get_news_from_nbc())
-print(get_news_from_fox())
+# print(get_news_from_fox())
 # print(get_news_from_washington_post())
+
+using_selenium()

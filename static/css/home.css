@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Asap:400,700|Lato:400,700,900|Source+Sans+Pro:400,700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Holtwood One SC);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+  body {
+  background-image: url("https://cdn.pixabay.com/photo/2012/01/09/09/59/earth-11595_1280.jpg");
+    }
+
+  .container {
+    max-width: 2000px;
+    padding-top: 20px;
+  }
+
+  h1 {
+  font-family: "Holtwood One SC", serif;
+  color: #999;
+  text-align:middle;
+  }
+
+
+  .bigbox {
+    display: grid;
+    grid: auto / auto auto auto;
+    grid-gap: 10px;
+    margin: 0 auto 20px auto;
+    max-width: 2000px;
+    border-radius: 2px;
+    padding: 10px 30px 5px;
+    text-align:left
+    box-shadow: 0 1px 4px #ccc;
+    border-radius: 2px;
+    background: #101010;
+
+}
+
+   .box {
+    margin: 0 auto 20px auto;
+    width: 350px;
+    padding: 10px 30px 5px;
+    text-align:left
+}
+
+    a.box {
+    font-family: "Helvetica Neue";
+    color: #999;
+    }
+
+    p {
+    font-family: "Pacifico", serif;
+    color: #999;
+    font-size: 20px;

@@ -9,7 +9,7 @@ FOX_NEWS_ROOT_URL = 'https://www.foxnews.com'
 NBC_URL = "https://www.nbcnews.com/health/coronavirus"
 CHROME_DRIVER_PATH = "C:\Program Files (x86)\chromedriver.exe"
 FOX_URL = "https://www.foxnews.com/category/health/infectious-disease/coronavirus"
-THE_WASHINGTON_POST = "https://www.washingtonpost.com/coronavirus/?itid=nb_hp_coronavirus"
+THE_WASHINGTON_POST = "https://www.washingtonpost.com/coronavirus/?itid=sf_coronavirus-living_subnav"
 
 # coronavirous news!
 
@@ -32,7 +32,7 @@ def get_news_from_fox():
     soup = BeautifulSoup(site_html, 'lxml')
     latest = soup.find("div", {"class": "content article-list"})
     for article in latest.findAll('article'):
-        news_list.append((article.text, FOX_NEWS_ROOT_URL+article.a['href']))
+        news_list.append((article.h4.text, FOX_NEWS_ROOT_URL+article.h4.a['href']))
     return news_list
 
 
@@ -41,12 +41,9 @@ def get_news_from_washington_post():
     site_url = THE_WASHINGTON_POST
     site_html = requests.get(site_url).text
     soup = BeautifulSoup(site_html, 'lxml')
-    latest = soup.find("div", {"class": "chain-content no-skin clear"})
-    for section in latest.findAll('a'):
-        # print(section)
-        print(section.text)
-        print(section['href'])
-        # news_list.append((section.text, FOX_NEWS_ROOT_URL+section.a['href']))
+    latest = soup.find("div", {"data-chain-name": "virus-stream-1"})
+    for div in latest.findAll("div", {"class": "headline x-small normal-style text-align-inherit"}):
+        news_list.append((div.a.text, div.a['href']))
     return news_list
 
 
@@ -65,4 +62,4 @@ def using_selenium():
 # print(get_news_from_fox())
 # print(get_news_from_washington_post())
 
-using_selenium()
+# using_selenium()

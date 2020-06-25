@@ -1,19 +1,39 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h3> This is the start of my child template</h3>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  </head>
+  <h3> Coronavirous </h3>
   <br>
-  <h4>Current date/time: {{ current_time | datetimefilter }}</h4>
-  <p>My string: {{my_string}}</p>
-  <p>Value from the list: {{my_list[3]}}</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in my_list %}
-    <li>{{n}}</li>
-    {% endfor %}
-  </ul>
-  <p>Same list with a filter: {{ my_list|join(', ') }}</p>
-  <h3> This is the end of my child template</h3>
-    {% block footer %}
-    {{super()}}
-    {% endblock %}
+  <p>FOX NEWS:</p>
+  <section class="bigbox">
+      {% for n in fox_list %}
+      <div class="box">
+        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+      </div>
+      {% endfor %}
+  </section>
+  <br>
+  <p>NBC NEWS:</p>
+  <section class="bigbox">
+      {% for n in nbc_list %}
+      <div class="box">
+        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+      </div>
+      {% endfor %}
+  </section>
+  <br>
+  <p>WASHINGTON NEWS:</p>
+  <section class="bigbox">
+      {% for n in nbc_list %}
+      <div class="box">
+        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+      </div>
+      {% endfor %}
+  </section>
+</html>
+  {% block footer %}
+  {{super()}}
+  {% endblock %}
 {% endblock %}

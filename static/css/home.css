@@ -1,19 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Asap:400,700|Lato:400,700,900|Source+Sans+Pro:400,700&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Holtwood One SC);
-@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
   body {
-  background-image: url("https://cdn.pixabay.com/photo/2012/01/09/09/59/earth-11595_1280.jpg");
-    }
+      background-image: url('../images/earth.jpg');
+  }
 
   .container {
     max-width: 2000px;
     padding-top: 20px;
   }
 
-  h1 {
-  font-family: "Holtwood One SC", serif;
+  h1, h3 {
+  font-family: "Permanent Marker", serif;
   color: #999;
-  text-align:middle;
+  margin-top: 50px
+  margin-left: 300px
   }
 
 
@@ -45,6 +46,6 @@
     }
 
     p {
-    font-family: "Pacifico", serif;
+    font-family: "Permanent Marker", serif;
     color: #999;
     font-size: 20px;

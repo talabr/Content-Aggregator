@@ -4,7 +4,8 @@
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
   </head>
-  <h3> Coronavirous </h3>
+  <br>
+  <h1>Top News</h1>
   <br>
   <p>FOX NEWS:</p>
   <section class="bigbox">
@@ -24,7 +25,7 @@
       {% endfor %}
   </section>
   <br>
-  <p>WASHINGTON NEWS:</p>
+  <p>WASHINGTON POST NEWS:</p>
   <section class="bigbox">
       {% for n in nbc_list %}
       <div class="box">

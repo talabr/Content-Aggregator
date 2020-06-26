@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  </head>
+  <br>
+  <h1>Why using our site?</h1>
+  <br>
+  <h3>Get Update! simplfy your life as it gathers all the latest news in one place!</h3>
+</html>
+  {% block footer %}
+  {{super()}}
+  {% endblock %}
+{% endblock %}

@@ -18,28 +18,28 @@ app.jinja_env.filters['datetimefilter'] = datetimefilter
 
 @app.route("/")
 def template_test():
-    return render_template('template.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
+    return render_template('home.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
                            wash_list=get_news_from_washington_post())
 
 
-@app.route("/home")
-def home():
+@app.route("/coronavirus")
+def coronavirus():
     return render_template(
-        'template.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
+        'coronavirus.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
         wash_list=get_news_from_washington_post())
 
 
 @app.route("/about")
 def about():
     return render_template(
-        'template.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
+        'home.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
         wash_list=get_news_from_washington_post())
 
 
 @app.route("/contact")
 def contact():
     return render_template(
-        'template.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
+        'home.html', nbc_list=get_news_from_nbc(), fox_list=get_news_from_fox(),
         wash_list=get_news_from_washington_post(), title="Contact Us")
 
 

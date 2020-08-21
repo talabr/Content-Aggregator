@@ -1,65 +1,47 @@
-from bs4 import BeautifulSoup
+import json
 import requests
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-
-FOX_NEWS_ROOT_URL = 'https://www.foxnews.com'
-NBC_URL = "https://www.nbcnews.com/health/coronavirus"
-CHROME_DRIVER_PATH = "C:\Program Files (x86)\chromedriver.exe"
-FOX_URL = "https://www.foxnews.com/category/health/infectious-disease/coronavirus"
-THE_WASHINGTON_POST = "https://www.washingtonpost.com/coronavirus/?itid=sf_coronavirus-living_subnav"
-
-# coronavirous news!
+from bs4 import BeautifulSoup
 
 
-def get_news_from_nbc():
-    news_list = []
-    site_url = NBC_URL
-    site_html = requests.get(site_url).text
-    nbc_soup = BeautifulSoup(site_html, 'lxml')
-    nbc_latest_news = nbc_soup.find("div", {"class": "package-grid__column"})
-    for l in nbc_latest_news.findAll('li'):
-        news_list.append((l.text, l.a['href']))
-    return news_list
+def load_configurations():
+    with open('configurations.json', 'r') as json_file:
+        configurations = json.load(json_file)
+    return configurations
 
 
-def get_news_from_fox():
-    news_list = []
-    site_url = FOX_URL
-    site_html = requests.get(site_url).text
-    soup = BeautifulSoup(site_html, 'lxml')
-    latest = soup.find("div", {"class": "content article-list"})
-    for article in latest.findAll('article'):
-        news_list.append((article.h4.text, FOX_NEWS_ROOT_URL+article.h4.a['href']))
-    return news_list
+def get_html_from_site(url):
+    site_html = requests.get(url).text
+    site_lxml = BeautifulSoup(site_html, 'lxml')
+    return site_lxml
 
 
-def get_news_from_washington_post():
-    news_list = []
-    site_url = THE_WASHINGTON_POST
-    site_html = requests.get(site_url).text
-    soup = BeautifulSoup(site_html, 'lxml')
-    latest = soup.find("div", {"data-chain-name": "virus-stream-1"})
-    for div in latest.findAll("div", {"class": "headline x-small normal-style text-align-inherit"}):
-        news_list.append((div.a.text, div.a['href']))
-    return news_list
+def find_top_news_div_from_html(site_name):
+    list_of_top_news = []
+    configurations = load_configurations()[site_name]
+    fox_lxml = get_html_from_site(configurations["coronavirus_page_url"])
+    latest_news_xml = fox_lxml.find(configurations["css_selector"],
+                                    configurations["css_selector_value"])
+    return list_of_top_news, configurations, latest_news_xml
 
 
-def using_selenium():
-    driver = webdriver.Chrome(CHROME_DRIVER_PATH)
-    driver.get('https://www.washingtonpost.com/')
-    button = driver.find_elements_by_xpath("//form[@id='search-form']")[0]
-    button.click()
-    # WebDriverWait(driver, 20).until(ec.element_to_be_clickable((By.XPATH,
-    #                                                             "//a[@class='vilynx_listened']"))).click()
-    # WebDriverWait(driver, 50).until(ec.element_to_be_clickable((By.XPATH,
-                                                                # "//div[@class='global']/span[@class='hfs-i hfs-i-search']"))).click()
+def make_list_of_fox_top_news():
+    list_of_top_news, configurations, latest_news_xml = find_top_news_div_from_html("fox_news")
+    print(list_of_top_news)
+    for article in latest_news_xml.findAll(configurations["inner_css_selector"]):
+        list_of_top_news.append((article.h4.text, configurations["site_url"] + article.h4.a['href']))
+    return list_of_top_news
 
-    # driver.quit()
-# print(get_news_from_nbc())
-# print(get_news_from_fox())
-# print(get_news_from_washington_post())
 
-# using_selenium()
+def make_list_of_nbc_top_news():
+    list_of_top_news, configurations, latest_news_xml = find_top_news_div_from_html("nbc_news")
+    for l in latest_news_xml.findAll(configurations["inner_css_selector"]):
+        list_of_top_news.append((l.text, l.a['href']))
+    return list_of_top_news
+
+
+def make_list_of_washington_post_top_news():
+    list_of_top_news, configurations, latest_news_xml = find_top_news_div_from_html("washington_post")
+    for div in latest_news_xml.findAll(configurations["inner_css_selector"],
+                                       configurations["inner_css_selector_value"]):
+        list_of_top_news.append((div.a.text, div.a['href']))
+    return list_of_top_news

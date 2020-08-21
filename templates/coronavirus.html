@@ -9,27 +9,27 @@
   <br>
   <p>FOX NEWS:</p>
   <section class="bigbox">
-      {% for n in fox_list %}
+      {% for news in fox_list %}
       <div class="box">
-        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+        <a href="{{ news[1] }}" style="color:#999;">{{ news[0] }}</a>
       </div>
       {% endfor %}
   </section>
   <br>
   <p>NBC NEWS:</p>
   <section class="bigbox">
-      {% for n in nbc_list %}
+      {% for news in nbc_list %}
       <div class="box">
-        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+        <a href="{{ news[1] }}" style="color:#999;">{{ news[0] }}</a>
       </div>
       {% endfor %}
   </section>
   <br>
   <p>WASHINGTON POST NEWS:</p>
   <section class="bigbox">
-      {% for n in nbc_list %}
+      {% for news in nbc_list %}
       <div class="box">
-        <a href="{{ n[1] }}" style="color:#999;">{{ n[0] }}</a>
+        <a href="{{ news[1] }}" style="color:#999;">{{ news[0] }}</a>
       </div>
       {% endfor %}
   </section>

@@ -1,0 +1,7 @@
+{"fox_news": {"site_url": "https://www.foxnews.com", "coronavirus_page_url": "https://www.foxnews.com/category/health/infectious-disease/coronavirus",
+  "css_selector": "div", "css_selector_value": {"class": "content article-list"}, "inner_css_selector":  "article"},
+  "nbc_news": {"coronavirus_page_url": "https://www.nbcnews.com/health/coronavirus",
+  "css_selector": "div", "css_selector_value": {"class": "package-grid__column"}, "inner_css_selector":  "li"},
+  "washington_post": {"coronavirus_page_url": "https://www.washingtonpost.com/coronavirus/?itid=sf_coronavirus-living_subnav",
+  "css_selector": "div", "css_selector_value": {"data-chain-name": "virus-stream-1"}, "inner_css_selector": "div",
+    "inner_css_selector_value": {"class": "headline x-small normal-style text-align-inherit"}}}
